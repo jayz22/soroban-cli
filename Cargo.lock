@@ -18,6 +18,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe"
 
 [[package]]
+name = "ahash"
+version = "0.4.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "739f4a8db6605981345c5654f3a85b056ce52f37a39d34da03f25bf2151ea16e"
+
+[[package]]
 name = "aho-corasick"
 version = "0.7.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -347,6 +353,49 @@ dependencies = [
 ]
 
 [[package]]
+name = "crossbeam-channel"
+version = "0.5.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c2dd04ddaf88237dc3b8d8f9a3c1004b506b54b3313403944054d23c0870c521"
+dependencies = [
+ "cfg-if",
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "crossbeam-deque"
+version = "0.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "715e8152b692bba2d374b53d4875445368fdf21a94751410af607a5ac677d1fc"
+dependencies = [
+ "cfg-if",
+ "crossbeam-epoch",
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "crossbeam-epoch"
+version = "0.9.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "01a9af1f4c2ef74bb8aa1f7e19706bc72d03598c8a570bb5de72243c7a9d9d5a"
+dependencies = [
+ "autocfg",
+ "cfg-if",
+ "crossbeam-utils",
+ "memoffset",
+ "scopeguard",
+]
+
+[[package]]
+name = "crossbeam-utils"
+version = "0.8.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4fb766fa798726286dbbb842f174001dab8abc7b627a1dd86e0b7222a95d929f"
+dependencies = [
+ "cfg-if",
+]
+
+[[package]]
 name = "crypto-common"
 version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -471,6 +520,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "derive-hex"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4b6618553c32cd1c1f4fbdb9418cc035f3168422f24406ebb08576f6db5ed6ec"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "difflib"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -506,6 +566,57 @@ name = "downcast-rs"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9ea835d29036a4087793836fa931b08837ad5e957da9e23886b29586fb9b6650"
+
+[[package]]
+name = "dusk-bls12_381"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "28080f02cb320edfe73bedec33ea720b5d37f14a8c37a2a9ae9ea9d4a163936a"
+dependencies = [
+ "byteorder",
+ "dusk-bytes",
+ "rand_core 0.6.4",
+ "rayon",
+ "subtle",
+]
+
+[[package]]
+name = "dusk-bytes"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f4aae12696d965c95ce5b79bc5612575e8aeac958c9e037b74ffa9e73e1cd8c7"
+dependencies = [
+ "derive-hex",
+]
+
+[[package]]
+name = "dusk-jubjub"
+version = "0.11.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "739d73eeac9cedbaa583f05f0e39a5d0d7fd5313d0146c7a54e12e38c66de968"
+dependencies = [
+ "dusk-bls12_381",
+ "dusk-bytes",
+ "rand_core 0.6.4",
+ "subtle",
+]
+
+[[package]]
+name = "dusk-plonk"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dfd2422e9d0630357d4f796057c5205c33b14b552dd1c92546006888642d3886"
+dependencies = [
+ "cfg-if",
+ "dusk-bls12_381",
+ "dusk-bytes",
+ "dusk-jubjub",
+ "hashbrown 0.9.1",
+ "itertools 0.9.0",
+ "merlin",
+ "rand_core 0.6.4",
+ "rayon",
+]
 
 [[package]]
 name = "dyn-fmt"
@@ -636,8 +747,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c05aeb6a22b8f62540c194aac980f2115af067bfe15a0734d7277a768d396b31"
 dependencies = [
  "cfg-if",
+ "js-sys",
  "libc",
  "wasi 0.11.0+wasi-snapshot-preview1",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -687,6 +800,15 @@ dependencies = [
  "tokio",
  "tokio-util",
  "tracing",
+]
+
+[[package]]
+name = "hashbrown"
+version = "0.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d7afe4a420e3fe79967a00898cc1f4db7c8a49a9333a29f8a4bd76a253d5cd04"
+dependencies = [
+ "ahash",
 ]
 
 [[package]]
@@ -891,7 +1013,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1885e79c1fc4b10f0e172c475f458b7f7b93061064d98c3293e98c5ba0c8b399"
 dependencies = [
  "autocfg",
- "hashbrown",
+ "hashbrown 0.12.3",
  "serde",
 ]
 
@@ -908,6 +1030,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
 dependencies = [
  "cfg-if",
+]
+
+[[package]]
+name = "itertools"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "284f18f85651fe11e8a991b2adb42cb078325c996ed026d994719efcfca1d54b"
+dependencies = [
+ "either",
 ]
 
 [[package]]
@@ -1003,6 +1134,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "keccak"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3afef3b6eff9ce9d8ff9b3601125eec7f0c8cbac7abd14f355d053fa56c98768"
+dependencies = [
+ "cpufeatures",
+]
+
+[[package]]
 name = "lazy_static"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1055,10 +1195,31 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2dffe52ecf27772e601905b7522cb4ef790d2cc203488bbd0e2fe85fcb74566d"
 
 [[package]]
+name = "memoffset"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5de893c32cde5f383baa4c04c5d6dbdd735cfd4a794b0debdb2bb1b421da5ff4"
+dependencies = [
+ "autocfg",
+]
+
+[[package]]
 name = "memory_units"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8452105ba047068f40ff7093dd1d9da90898e63dd61736462e9cdda6a90ad3c3"
+
+[[package]]
+name = "merlin"
+version = "3.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "58c38e2799fc0978b65dfff8023ec7843e2330bb462f19198840b34b6582397d"
+dependencies = [
+ "byteorder",
+ "keccak",
+ "rand_core 0.6.4",
+ "zeroize",
+]
 
 [[package]]
 name = "mime"
@@ -1285,7 +1446,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "59230a63c37f3e18569bdb90e4a89cbf5bf8b06fea0b84e65ea10cc4df47addd"
 dependencies = [
  "difflib",
- "itertools",
+ "itertools 0.10.5",
  "predicates-core",
 ]
 
@@ -1432,6 +1593,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ca3129af7b92a17112d59ad498c6f81eaf463253766b90396d39ea7a39d6613c"
 dependencies = [
  "rand_core 0.5.1",
+]
+
+[[package]]
+name = "rayon"
+version = "1.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6db3a213adf02b3bcfd2d3846bb41cb22857d131789e01df434fb7e7bc0759b7"
+dependencies = [
+ "either",
+ "rayon-core",
+]
+
+[[package]]
+name = "rayon-core"
+version = "1.10.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cac410af5d00ab6884528b4ab69d1e8e146e8d471201800fa1b4524126de6ad3"
+dependencies = [
+ "crossbeam-channel",
+ "crossbeam-deque",
+ "crossbeam-utils",
+ "num_cpus",
 ]
 
 [[package]]
@@ -1791,8 +1974,8 @@ dependencies = [
 
 [[package]]
 name = "soroban-auth"
-version = "0.4.1"
-source = "git+https://github.com/stellar/rs-soroban-sdk?rev=980778ec#980778ecc78e57178fd0226fed25b341a17c1eac"
+version = "0.4.3"
+source = "git+https://github.com/jayz22/rs-soroban-sdk?rev=a936218#a9362184e73c3151e3d84ad2f01e645c7618cae3"
 dependencies = [
  "soroban-sdk",
 ]
@@ -1838,7 +2021,7 @@ dependencies = [
 [[package]]
 name = "soroban-env-common"
 version = "0.0.12"
-source = "git+https://github.com/stellar/rs-soroban-env?rev=65498c8#65498c84ccc30df302c99b50af31752f7aa087e8"
+source = "git+https://github.com/jayz22/rs-soroban-env?rev=6704af5#6704af56c57b178d8741fd2c6aeabf291af45fca"
 dependencies = [
  "crate-git-revision",
  "serde",
@@ -1851,7 +2034,7 @@ dependencies = [
 [[package]]
 name = "soroban-env-guest"
 version = "0.0.12"
-source = "git+https://github.com/stellar/rs-soroban-env?rev=65498c8#65498c84ccc30df302c99b50af31752f7aa087e8"
+source = "git+https://github.com/jayz22/rs-soroban-env?rev=6704af5#6704af56c57b178d8741fd2c6aeabf291af45fca"
 dependencies = [
  "soroban-env-common",
  "static_assertions",
@@ -1860,17 +2043,22 @@ dependencies = [
 [[package]]
 name = "soroban-env-host"
 version = "0.0.12"
-source = "git+https://github.com/stellar/rs-soroban-env?rev=65498c8#65498c84ccc30df302c99b50af31752f7aa087e8"
+source = "git+https://github.com/jayz22/rs-soroban-env?rev=6704af5#6704af56c57b178d8741fd2c6aeabf291af45fca"
 dependencies = [
  "backtrace",
  "curve25519-dalek",
+ "dusk-bytes",
+ "dusk-jubjub",
+ "dusk-plonk",
  "dyn-fmt",
  "ed25519-dalek",
+ "getrandom 0.2.8",
  "hex",
  "log",
  "num-derive",
  "num-integer",
  "num-traits",
+ "rand_core 0.6.4",
  "sha2 0.10.6",
  "soroban-env-common",
  "soroban-native-sdk-macros",
@@ -1882,9 +2070,9 @@ dependencies = [
 [[package]]
 name = "soroban-env-macros"
 version = "0.0.12"
-source = "git+https://github.com/stellar/rs-soroban-env?rev=65498c8#65498c84ccc30df302c99b50af31752f7aa087e8"
+source = "git+https://github.com/jayz22/rs-soroban-env?rev=6704af5#6704af56c57b178d8741fd2c6aeabf291af45fca"
 dependencies = [
- "itertools",
+ "itertools 0.10.5",
  "proc-macro2",
  "quote",
  "serde",
@@ -1896,8 +2084,8 @@ dependencies = [
 
 [[package]]
 name = "soroban-ledger-snapshot"
-version = "0.4.1"
-source = "git+https://github.com/stellar/rs-soroban-sdk?rev=980778ec#980778ecc78e57178fd0226fed25b341a17c1eac"
+version = "0.4.3"
+source = "git+https://github.com/jayz22/rs-soroban-sdk?rev=a936218#a9362184e73c3151e3d84ad2f01e645c7618cae3"
 dependencies = [
  "serde",
  "serde_json",
@@ -1908,9 +2096,9 @@ dependencies = [
 [[package]]
 name = "soroban-native-sdk-macros"
 version = "0.0.12"
-source = "git+https://github.com/stellar/rs-soroban-env?rev=65498c8#65498c84ccc30df302c99b50af31752f7aa087e8"
+source = "git+https://github.com/jayz22/rs-soroban-env?rev=6704af5#6704af56c57b178d8741fd2c6aeabf291af45fca"
 dependencies = [
- "itertools",
+ "itertools 0.10.5",
  "proc-macro2",
  "quote",
  "syn",
@@ -1918,8 +2106,8 @@ dependencies = [
 
 [[package]]
 name = "soroban-sdk"
-version = "0.4.1"
-source = "git+https://github.com/stellar/rs-soroban-sdk?rev=980778ec#980778ecc78e57178fd0226fed25b341a17c1eac"
+version = "0.4.3"
+source = "git+https://github.com/jayz22/rs-soroban-sdk?rev=a936218#a9362184e73c3151e3d84ad2f01e645c7618cae3"
 dependencies = [
  "bytes-lit",
  "ed25519-dalek",
@@ -1933,11 +2121,11 @@ dependencies = [
 
 [[package]]
 name = "soroban-sdk-macros"
-version = "0.4.1"
-source = "git+https://github.com/stellar/rs-soroban-sdk?rev=980778ec#980778ecc78e57178fd0226fed25b341a17c1eac"
+version = "0.4.3"
+source = "git+https://github.com/jayz22/rs-soroban-sdk?rev=a936218#a9362184e73c3151e3d84ad2f01e645c7618cae3"
 dependencies = [
  "darling",
- "itertools",
+ "itertools 0.10.5",
  "proc-macro2",
  "quote",
  "sha2 0.10.6",
@@ -1949,12 +2137,12 @@ dependencies = [
 
 [[package]]
 name = "soroban-spec"
-version = "0.4.1"
-source = "git+https://github.com/stellar/rs-soroban-sdk?rev=980778ec#980778ecc78e57178fd0226fed25b341a17c1eac"
+version = "0.4.3"
+source = "git+https://github.com/jayz22/rs-soroban-sdk?rev=a936218#a9362184e73c3151e3d84ad2f01e645c7618cae3"
 dependencies = [
  "base64",
  "darling",
- "itertools",
+ "itertools 0.10.5",
  "prettyplease",
  "proc-macro2",
  "quote",
@@ -1970,8 +2158,8 @@ dependencies = [
 
 [[package]]
 name = "soroban-token-spec"
-version = "0.4.1"
-source = "git+https://github.com/stellar/rs-soroban-sdk?rev=980778ec#980778ecc78e57178fd0226fed25b341a17c1eac"
+version = "0.4.3"
+source = "git+https://github.com/jayz22/rs-soroban-sdk?rev=a936218#a9362184e73c3151e3d84ad2f01e645c7618cae3"
 dependencies = [
  "soroban-auth",
  "soroban-sdk",
